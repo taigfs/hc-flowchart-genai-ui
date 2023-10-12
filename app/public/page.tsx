@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth/next"
 import type { NextRequest } from "next/server"
-import { authOptions } from "../api/auth/[...nextauth]/route"
 import { Navbar } from "@/components/navbar"
+import { authOptions } from "../api/auth/[...nextauth]/auth-options";
 
 export default async function Protected (req: NextRequest): Promise<any> {
   const session = await getServerSession(authOptions)
