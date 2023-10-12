@@ -73,7 +73,7 @@ export const Navbar = () => {
                 src="https://hookcaptain.s3.sa-east-1.amazonaws.com/hc-logo.png"
                 alt="Hook Captain"
               />
-              <span className="ml-3 text-lg text-gray-200 font-bold">Flowchart Generator</span>
+              <span className="ml-3 text-lg text-gray-200 font-bold">AI Flowchart Generator</span>
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
