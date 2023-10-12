@@ -1,8 +1,13 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
-import { getServerSession } from "next-auth";
+'use client'
+// import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
+// import { getServerSession } from "next-auth";
 
-export const Navbar = async () => {
-  const session = await getServerSession(authOptions)
+import { signOut, useSession } from "next-auth/react";
+
+export const Navbar = () => {
+  // const session = await getServerSession(authOptions)
+  const session = useSession();
+  console.log(session);
   return (
     <nav className="bg-gray-800">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -132,7 +137,7 @@ export const Navbar = async () => {
                   <span className="sr-only">Open user menu</span>
                   <img
                     className="h-8 w-8 rounded-full"
-                    src={session?.user?.image || undefined}
+                    src={session?.data?.user?.image || undefined}
                     alt=""
                   />
                 </button>
@@ -172,7 +177,7 @@ export const Navbar = async () => {
                   Settings
                 </a>
                 <a
-                  href="#"
+                  onClick={() => signOut()}
                   className="block px-4 py-2 text-sm text-gray-700"
                   role="menuitem"
                   id="user-menu-item-2"

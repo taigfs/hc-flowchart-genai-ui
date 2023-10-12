@@ -1,5 +1,4 @@
 import { getServerSession } from "next-auth/next"
-// import type { NextRequest } from "next/server"
 import { Navbar } from "@/components/navbar"
 import { authOptions } from "../api/auth/[...nextauth]/auth-options";
 
