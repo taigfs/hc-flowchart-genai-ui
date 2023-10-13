@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { Navbar } from "@/components/navbar";
 import { authOptions } from "./api/auth/[...nextauth]/auth-options";
+import Diagram from "@/components/reactflow/diagram";
 
 export default async function Protected(): Promise<any> {
   const session = await getServerSession(authOptions);
@@ -21,8 +22,9 @@ export default async function Protected(): Promise<any> {
               </button>
             </div>
           </div>
-          <div className="bg-gray-900 p-4 rounded">Conteúdo da Coluna 2</div>
-          {/* Você pode adicionar mais elementos aqui */}
+          <div className="bg-gray-900 p-4 rounded">
+            <Diagram />
+          </div>
         </div>
       </div>
     </>
