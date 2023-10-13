@@ -7,8 +7,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { useCompletion } from 'ai/react';
 
 export default function Protected() {
-  const { completion, input, handleInputChange, handleSubmit } =
-    useCompletion();
+  const {
+    completion: mermaidCode,
+    input,
+    handleInputChange,
+    handleSubmit,
+    isLoading,
+  } = useCompletion();
   return (
     <>
       <Navbar />
@@ -26,14 +31,14 @@ export default function Protected() {
                 value={input}
                 onChange={handleInputChange}
               />
-              <div>{completion}</div>
+              <div>{mermaidCode}</div>
               <Button className='rounded-t-none' type='submit'>
                 Submit
               </Button>
             </div>
           </div>
           <div className='bg-gray-900 p-4 rounded'>
-            <Diagram />
+            <Diagram mermaidCode={mermaidCode} isComplete={!isLoading} />
           </div>
         </div>
       </form>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useState, useCallback } from 'react';
 import ReactFlow, {
   Background,
@@ -17,7 +17,18 @@ import ReactFlow, {
 } from 'reactflow';
 import { CustomNode } from './custom-node';
 
-const Diagram = () => {
+interface DiagramProps {
+  mermaidCode?: string;
+  isComplete?: boolean;
+}
+
+const Diagram = ({ mermaidCode = '', isComplete = false }: DiagramProps) => {
+  useEffect(() => {
+    if (isComplete && mermaidCode) {
+      console.log('mermaidCode', mermaidCode);
+    }
+  }, [mermaidCode, isComplete]);
+
   const initialNodes: Node[] = [
     {
       id: '1',
@@ -82,17 +93,20 @@ const Diagram = () => {
   );
 
   return (
-    <ReactFlow
-      nodes={nodes}
-      onNodesChange={onNodesChange}
-      edges={edges}
-      onEdgesChange={onEdgesChange}
-      onConnect={onConnect}
-      nodeTypes={nodeTypes}
-    >
-      <Background />
-      <Controls />
-    </ReactFlow>
+    <>
+      <ReactFlow
+        nodes={nodes}
+        onNodesChange={onNodesChange}
+        edges={edges}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+        nodeTypes={nodeTypes}
+      >
+        <Background />
+        <Controls />
+      </ReactFlow>
+      {mermaidCode}
+    </>
   );
 };
 

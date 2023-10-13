@@ -1,5 +1,6 @@
 import OpenAI from 'openai';
 import { OpenAIStream, StreamingTextResponse } from 'ai';
+import { promptTemplate } from '@/app/prompts/prompt-1';
 
 // Create an OpenAI API client (that's edge friendly!)
 const openai = new OpenAI({
@@ -14,18 +15,11 @@ export async function POST(req: Request) {
 
   // Ask OpenAI for a streaming completion given the prompt
   const response: any = await openai.completions.create({
-    model: 'text-davinci-003',
+    model: 'gpt-3.5-turbo-instruct',
     stream: true,
-    temperature: 0.6,
+    temperature: 0.1,
     max_tokens: 300,
-    prompt: `Create three slogans for a business with unique features.
- 
-Business: Bookstore with cats
-Slogans: "Purr-fect Pages", "Books and Whiskers", "Novels and Nuzzles"
-Business: Gym with rock climbing
-Slogans: "Peak Performance", "Reach New Heights", "Climb Your Way Fit"
-Business: ${prompt}
-Slogans:`,
+    prompt: promptTemplate(prompt),
   });
 
   // Convert the response into a friendly text-stream
