@@ -7,21 +7,21 @@ export default async function Protected(): Promise<any> {
   return (
     <>
       <Navbar />
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 flex py-3"
+      <div className="mx-auto max-w-7xl px-1 sm:px-6 lg:px-8 flex py-3"
            style={{ height: 'calc(100% - 64px)'}}>
         <div className="grid grid-cols-2 gap-4 w-full h-full">
-          <div className="bg-gray-900 p-4">
+          <div className="bg-gray-900 p-4 rounded">
             <div className="flex flex-col h-full">
               <textarea
-                className="flex-grow resize-none border rounded p-2 bg-gray-900 text-white border-gray"
-                placeholder="Digite aqui..."
+                className="focus:border-gray-800 focus:outline-none flex-grow resize-none border border-solid border-gray-800 border-2 rounded p-2 bg-gray-900 text-white rounded-b-none"
+                placeholder="Type here..."
               ></textarea>
-              <button className="w-full text-white py-2 px-4 rounded bg-gray-800 hover:bg-gray-700">
+              <button className="w-full text-white py-2 px-4 rounded bg-gray-800 hover:bg-gray-700 rounded-t-none">
                 Submit
               </button>
             </div>
           </div>
-          <div className="bg-gray-900 p-4">Conteúdo da Coluna 2</div>
+          <div className="bg-gray-900 p-4 rounded">Conteúdo da Coluna 2</div>
           {/* Você pode adicionar mais elementos aqui */}
         </div>
       </div>
