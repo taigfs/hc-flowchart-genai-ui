@@ -13,6 +13,7 @@ import ReactFlow, {
   addEdge,
   Connection,
   Edge,
+  MarkerType,
 } from 'reactflow';
 import { CustomNode } from './custom-node';
 
@@ -39,7 +40,18 @@ const Diagram = () => {
   ];
 
   const initialEdges: Edge[] = [
-    // { id: '1-2', source: '1', target: '2' }
+    {
+      id: '1-2',
+      source: '1',
+      target: '2',
+      markerEnd: { type: MarkerType.ArrowClosed },
+    },
+    {
+      id: '2-3',
+      source: '2',
+      target: '3',
+      markerEnd: { type: MarkerType.ArrowClosed },
+    },
   ];
 
   const [nodes, setNodes] = useState(initialNodes);
