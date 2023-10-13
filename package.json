@@ -16,6 +16,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.287.0",
+    "mermaid": "^10.5.0",
     "next": "13.5.4",
     "next-auth": "^4.23.2",
     "openai": "^4.12.1",

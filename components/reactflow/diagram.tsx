@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo } from 'react';
+import mermaid from 'mermaid';
 import { useState, useCallback } from 'react';
 import ReactFlow, {
   Background,
@@ -16,6 +17,7 @@ import ReactFlow, {
   MarkerType,
 } from 'reactflow';
 import { CustomNode } from './custom-node';
+import { parseMermaidCode } from '@/lib/mermaid-utils';
 
 interface DiagramProps {
   mermaidCode?: string;
@@ -23,11 +25,17 @@ interface DiagramProps {
 }
 
 const Diagram = ({ mermaidCode = '', isComplete = false }: DiagramProps) => {
-  useEffect(() => {
-    if (isComplete && mermaidCode) {
-      console.log('mermaidCode', mermaidCode);
-    }
-  }, [mermaidCode, isComplete]);
+  parseMermaidCode();
+  // useEffect(() => {
+  //   async function parseMermaidCode() {
+  //     if (isComplete && mermaidCode) {
+  //       console.log('mermaidCode', mermaidCode);
+  //       const parsedData = await mermaid.parse(mermaidCode);
+  //       console.log(parsedData);
+  //     }
+  //   }
+  //   parseMermaidCode();
+  // }, [mermaidCode, isComplete]);
 
   const initialNodes: Node[] = [
     {
