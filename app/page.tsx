@@ -5,6 +5,7 @@ import Diagram from '@/components/reactflow/diagram';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useCompletion } from 'ai/react';
+import { useSession } from 'next-auth/react';
 
 export default function Protected() {
   const {
@@ -14,6 +15,18 @@ export default function Protected() {
     handleSubmit,
     isLoading,
   } = useCompletion();
+
+  const session = useSession();
+  const user = session?.data?.user;
+
+  if (user?.email !== 'taigfs@gmail.com') {
+    return (
+      <div className='flex flex-col items-center justify-center h-screen'>
+        <div className='text-3xl font-bold'>403</div>
+        <div className='text-xl'>Forbidden</div>
+      </div>
+    );
+  }
 
   const Loading = () => (
     <div className='relative h-full'>
