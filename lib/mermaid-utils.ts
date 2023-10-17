@@ -2,27 +2,12 @@ import mermaid from 'mermaid';
 import { Node, Edge, MarkerType } from 'reactflow';
 
 export async function parseMermaidCode(
-  mermaidCode?: string
+  mermaidCode: string
 ): Promise<{ nodes: Node[]; edges: Edge[] }> {
-  // const renderCallback = (svgCode) => {
-  //   // Now, you have the SVG code in the `svgCode` variable.
-  //   // You can use it to convert to React-Flow elements.
-  //   convertToReactFlowElements(svgCode);
-  // };
-
   // Render the Mermaid code and invoke the callback
 
-  const mermaidCode1 = `graph LR
-  start[Start] --> type_username[Type Username]
-  type_username --> type_password[Type Password]
-  type_password --> click_button[Click on Button]
-  click_button -->|Success| check_title[Check Home Page Title]
-  click_button -->|Error| check_alert[Check Alert Message]
-  check_title --> finish[Finish]
-  check_alert --> finish`;
   mermaid.initialize({ startOnLoad: false }); // Initialize Mermaid (if not already initialized)
-  const svgCode = await mermaid.render('mermaid-chart', mermaidCode1);
-  console.log(svgCode);
+  const svgCode = await mermaid.render('mermaid-chart', mermaidCode);
   return convertToReactFlowElements(svgCode.svg);
 }
 
@@ -32,6 +17,9 @@ const convertToReactFlowElements = (
   nodes: Node[];
   edges: Edge[];
 } => {
+  // Now, you have the SVG code in the svgCode variable.
+  console.log(svgCode);
+
   // Create a dummy div element to parse the SVG code as HTML
   const dummyDiv = document.createElement('div');
   dummyDiv.innerHTML = svgCode;
@@ -39,8 +27,6 @@ const convertToReactFlowElements = (
   // Select nodes and edges from the SVG
   const mermaidNodes = Array.from(dummyDiv.querySelectorAll('.node'));
   const mermaidEdges = Array.from(dummyDiv.querySelectorAll('.edgePaths path'));
-  console.log(mermaidNodes);
-  console.log(mermaidEdges);
 
   // Initialize an array to store React-Flow elements
   const nodes: Node[] = [];

@@ -27,23 +27,14 @@ interface DiagramProps {
 const Diagram = ({ mermaidCode = '', isComplete = false }: DiagramProps) => {
   useEffect(() => {
     async function parse() {
-      const { nodes, edges } = await parseMermaidCode();
+      const { nodes, edges } = await parseMermaidCode(mermaidCode);
       setEdges(edges);
       setNodes(nodes);
     }
-    parse();
-  }, []);
-
-  // useEffect(() => {
-  //   async function parseMermaidCode() {
-  //     if (isComplete && mermaidCode) {
-  //       console.log('mermaidCode', mermaidCode);
-  //       const parsedData = await mermaid.parse(mermaidCode);
-  //       console.log(parsedData);
-  //     }
-  //   }
-  //   parseMermaidCode();
-  // }, [mermaidCode, isComplete]);
+    if (isComplete && mermaidCode) {
+      parse();
+    }
+  }, [mermaidCode, isComplete]);
 
   const initialNodes: Node[] = [
     {
@@ -109,20 +100,17 @@ const Diagram = ({ mermaidCode = '', isComplete = false }: DiagramProps) => {
   );
 
   return (
-    <>
-      <ReactFlow
-        nodes={nodes}
-        onNodesChange={onNodesChange}
-        edges={edges}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        nodeTypes={nodeTypes}
-      >
-        <Background />
-        <Controls />
-      </ReactFlow>
-      {mermaidCode}
-    </>
+    <ReactFlow
+      nodes={nodes}
+      onNodesChange={onNodesChange}
+      edges={edges}
+      onEdgesChange={onEdgesChange}
+      onConnect={onConnect}
+      nodeTypes={nodeTypes}
+    >
+      <Background />
+      <Controls />
+    </ReactFlow>
   );
 };
 

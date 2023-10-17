@@ -14,6 +14,15 @@ export default function Protected() {
     handleSubmit,
     isLoading,
   } = useCompletion();
+
+  const Loading = () => (
+    <div className='relative h-full'>
+      <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+        Loading...
+      </div>
+    </div>
+  );
+
   return (
     <>
       <Navbar />
@@ -31,14 +40,17 @@ export default function Protected() {
                 value={input}
                 onChange={handleInputChange}
               />
-              <div>{mermaidCode}</div>
               <Button className='rounded-t-none' type='submit'>
                 Submit
               </Button>
             </div>
           </div>
           <div className='bg-gray-900 p-4 rounded col-span-2'>
-            <Diagram mermaidCode={mermaidCode} isComplete={!isLoading} />
+            {isLoading ? (
+              <Loading />
+            ) : (
+              <Diagram mermaidCode={mermaidCode} isComplete={!isLoading} />
+            )}
           </div>
         </div>
       </form>
