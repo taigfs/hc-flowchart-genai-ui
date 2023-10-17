@@ -22,8 +22,8 @@ export default function Protected() {
         className='mx-auto max-w-7xl px-1 sm:px-6 lg:px-8 flex py-3'
         style={{ height: 'calc(100% - 110px)' }}
       >
-        <div className='grid grid-cols-2 gap-4 w-full h-full'>
-          <div className='bg-gray-900 p-4 rounded'>
+        <div className='grid grid-cols-3 gap-4 w-full h-full'>
+          <div className='bg-gray-900 p-4 rounded col-span-1'>
             <div className='flex flex-col h-full'>
               <Textarea
                 placeholder='Type here...'
@@ -37,7 +37,7 @@ export default function Protected() {
               </Button>
             </div>
           </div>
-          <div className='bg-gray-900 p-4 rounded'>
+          <div className='bg-gray-900 p-4 rounded col-span-2'>
             <Diagram mermaidCode={mermaidCode} isComplete={!isLoading} />
           </div>
         </div>
