@@ -22,14 +22,14 @@ export const CustomNode = ({ data, type }: CustomNodeProps) => {
       {/* Porta de entrada (input) */}
       <Handle
         type='target'
-        position={Position.Top}
+        position={Position.Left}
         id='a'
         style={{ background: '#555' }}
       />
 
       <Handle
         type='source'
-        position={Position.Bottom}
+        position={Position.Right}
         id='b'
         style={{ background: '#555' }}
       />

@@ -25,7 +25,15 @@ interface DiagramProps {
 }
 
 const Diagram = ({ mermaidCode = '', isComplete = false }: DiagramProps) => {
-  parseMermaidCode();
+  useEffect(() => {
+    async function parse() {
+      const { nodes, edges } = await parseMermaidCode();
+      setEdges(edges);
+      setNodes(nodes);
+    }
+    parse();
+  }, []);
+
   // useEffect(() => {
   //   async function parseMermaidCode() {
   //     if (isComplete && mermaidCode) {
