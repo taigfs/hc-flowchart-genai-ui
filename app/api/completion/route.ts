@@ -1,6 +1,6 @@
 import OpenAI from 'openai';
 import { OpenAIStream, StreamingTextResponse } from 'ai';
-import { promptTemplate } from '@/app/prompts/prompt-1';
+import { promptTemplate } from '@/app/prompts/prompt-2';
 
 // Create an OpenAI API client (that's edge friendly!)
 const openai = new OpenAI({

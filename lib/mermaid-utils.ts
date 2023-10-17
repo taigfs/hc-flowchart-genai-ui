@@ -4,6 +4,7 @@ import { Node, Edge, MarkerType } from 'reactflow';
 export async function parseMermaidCode(
   mermaidCode: string
 ): Promise<{ nodes: Node[]; edges: Edge[] }> {
+  console.log(mermaidCode);
   // Render the Mermaid code and invoke the callback
 
   mermaid.initialize({ startOnLoad: false }); // Initialize Mermaid (if not already initialized)
@@ -44,7 +45,9 @@ const convertToReactFlowElements = (
       id = matches[1];
     }
 
-    const label = node.querySelector('.nodeLabel')?.textContent;
+    const nodeLabel = node.querySelector('.nodeLabel')?.textContent;
+    const { label, type } = extractLabelAndType(nodeLabel || '');
+
     const position = {
       x: parseFloat(node.getAttribute('transform')!.split('(')[1]) * 1.2,
       y: parseFloat(node.getAttribute('transform')!.split(',')[1]) * 1.2,
@@ -52,7 +55,7 @@ const convertToReactFlowElements = (
 
     nodes.push({
       id,
-      type: 'activity',
+      type: type,
       position,
       data: { label },
     });
@@ -90,3 +93,12 @@ const convertToReactFlowElements = (
     edges,
   };
 };
+
+function extractLabelAndType(input: string): { label: string; type: string } {
+  const [label, type] = input.split('¡!');
+
+  return {
+    label: label.trim(),
+    type: type.trim().replace('!¡', ''),
+  };
+}
