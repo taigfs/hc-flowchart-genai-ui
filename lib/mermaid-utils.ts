@@ -99,6 +99,6 @@ function extractLabelAndType(input: string): { label: string; type: string } {
 
   return {
     label: label.trim(),
-    type: type.trim().replace('!¡', ''),
+    type: type?.trim().replace('!¡', '') || 'default',
   };
 }

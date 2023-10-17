@@ -18,7 +18,6 @@ import ReactFlow, {
 } from 'reactflow';
 import { CustomNode } from './custom-node';
 import { parseMermaidCode } from '@/lib/mermaid-utils';
-import { sampleMermaidCode2 } from '@/lib/sample-mermaid-code-2';
 
 interface DiagramProps {
   mermaidCode?: string;
@@ -28,14 +27,14 @@ interface DiagramProps {
 const Diagram = ({ mermaidCode = '', isComplete = false }: DiagramProps) => {
   useEffect(() => {
     async function parse() {
-      const { nodes, edges } = await parseMermaidCode(sampleMermaidCode2);
+      const { nodes, edges } = await parseMermaidCode(mermaidCode);
       setEdges(edges);
       setNodes(nodes);
     }
-    // if (isComplete && mermaidCode) {
-    parse();
-    // }
-  }, []); // }, [mermaidCode, isComplete]);
+    if (isComplete && mermaidCode) {
+      parse();
+    }
+  }, [mermaidCode, isComplete]);
 
   const initialNodes: Node[] = [
     {
