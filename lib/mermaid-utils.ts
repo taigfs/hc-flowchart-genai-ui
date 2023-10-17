@@ -1,14 +1,16 @@
 import mermaid from 'mermaid';
 import { Node, Edge, MarkerType } from 'reactflow';
+import { replaceDoubleQuotes } from './utils';
 
 export async function parseMermaidCode(
   mermaidCode: string
 ): Promise<{ nodes: Node[]; edges: Edge[] }> {
   console.log(mermaidCode);
   // Render the Mermaid code and invoke the callback
+  const filteredCode = replaceDoubleQuotes(mermaidCode);
 
   mermaid.initialize({ startOnLoad: false }); // Initialize Mermaid (if not already initialized)
-  const svgCode = await mermaid.render('mermaid-chart', mermaidCode);
+  const svgCode = await mermaid.render('mermaid-chart', filteredCode);
   return convertToReactFlowElements(svgCode.svg);
 }
 
@@ -95,6 +97,7 @@ const convertToReactFlowElements = (
 };
 
 function extractLabelAndType(input: string): { label: string; type: string } {
+  // expected input: 'label¡!type¡!'
   const [label, type] = input.split('¡!');
 
   return {
