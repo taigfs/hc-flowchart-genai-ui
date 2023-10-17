@@ -36,44 +36,8 @@ const Diagram = ({ mermaidCode = '', isComplete = false }: DiagramProps) => {
     }
   }, [mermaidCode, isComplete]);
 
-  const initialNodes: Node[] = [
-    {
-      id: '1',
-      position: { x: 0, y: 0 },
-      data: { label: 'Start', value: 123 },
-      type: 'startEvent',
-    },
-    {
-      id: '2',
-      position: { x: 100, y: 100 },
-      data: { label: 'Run' },
-      type: 'activity',
-    },
-    {
-      id: '3',
-      position: { x: 200, y: 200 },
-      data: { label: 'End' },
-      type: 'endEvent',
-    },
-  ];
-
-  const initialEdges: Edge[] = [
-    {
-      id: '1-2',
-      source: '1',
-      target: '2',
-      markerEnd: { type: MarkerType.ArrowClosed },
-    },
-    {
-      id: '2-3',
-      source: '2',
-      target: '3',
-      markerEnd: { type: MarkerType.ArrowClosed },
-    },
-  ];
-
-  const [nodes, setNodes] = useState(initialNodes);
-  const [edges, setEdges] = useState(initialEdges);
+  const [nodes, setNodes] = useState<Node[]>([]);
+  const [edges, setEdges] = useState<Edge[]>([]);
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) =>

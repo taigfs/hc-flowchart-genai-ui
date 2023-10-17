@@ -48,22 +48,30 @@ export const CustomNode = ({ data, type }: CustomNodeProps) => {
         >
           {type}
         </span>
-        {/* Conteúdo do nó */}
         {data.label}
       </div>
-
-      {/* Porta de entrada (input) */}
       <Handle
         type='target'
         position={Position.Top}
         id='a'
         style={{ background: '#555' }}
       />
-
       <Handle
         type='source'
         position={Position.Bottom}
         id='b'
+        style={{ background: '#555' }}
+      />
+      <Handle
+        type='target'
+        position={Position.Left}
+        id='c'
+        style={{ background: '#555' }}
+      />
+      <Handle
+        type='target'
+        position={Position.Right}
+        id='d'
         style={{ background: '#555' }}
       />
     </div>
