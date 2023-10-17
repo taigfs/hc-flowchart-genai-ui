@@ -5,7 +5,7 @@ export const promptTemplate = (userInput: string) => {
   - endEvent
   - activity
   You should include the node type in it's label, like this "Start ¡!startEvent!¡" or "Do something ¡!activity!¡".
-  The diagram direction should be top to bottom.
+  The diagram direction should be TD, top down.
   Only return the flowchart in mermaid JS format with no markdown markers.
   Topic: ${userInput}`;
 };
