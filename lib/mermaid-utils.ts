@@ -1,16 +1,34 @@
 import mermaid from 'mermaid';
 import { Node, Edge, MarkerType } from 'reactflow';
-import { extractLabelAndType, replaceDoubleQuotes } from './utils';
+import {
+  extractLabelAndType,
+  removeDoubleQuoteInsideParentheses,
+  removeMarkdowncode,
+} from './utils';
 
 export async function parseMermaidCode(
   mermaidCode: string
 ): Promise<{ nodes: Node[]; edges: Edge[] }> {
   console.log(mermaidCode);
   // Render the Mermaid code and invoke the callback
-  const filteredCode = replaceDoubleQuotes(mermaidCode);
+  const filteredCode = removeMarkdowncode(
+    removeDoubleQuoteInsideParentheses(mermaidCode)
+  );
+  let svgCode: any;
 
-  mermaid.initialize({ startOnLoad: false }); // Initialize Mermaid (if not already initialized)
-  const svgCode = await mermaid.render('mermaid-chart', filteredCode);
+  try {
+    mermaid.initialize({ startOnLoad: false }); // Initialize Mermaid (if not already initialized)
+    svgCode = await mermaid.render('mermaid-chart', filteredCode);
+    // Continue com o código caso não ocorra um erro de parse
+  } catch (error) {
+    // Lida com o erro de parse aqui
+    console.error('Erro de parse do Mermaid:', error);
+    alert('Erro de parse do Mermaid');
+    return {
+      nodes: [],
+      edges: [],
+    };
+  }
   return convertToReactFlowElements(svgCode.svg);
 }
 
