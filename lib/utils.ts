@@ -9,3 +9,16 @@ export function replaceDoubleQuotes(text: string): string {
   // return text.replace(/"/g, "'");
   return text.replace(/"/g, '&quot;');
 }
+
+export function extractLabelAndType(input: string): {
+  label: string;
+  type: string;
+} {
+  // expected input: 'label¡!type¡!'
+  const [label, type] = input.split('¡!');
+
+  return {
+    label: label.trim(),
+    type: type?.trim().replace('!¡', '') || 'default',
+  };
+}

@@ -1,6 +1,6 @@
 import mermaid from 'mermaid';
 import { Node, Edge, MarkerType } from 'reactflow';
-import { replaceDoubleQuotes } from './utils';
+import { extractLabelAndType, replaceDoubleQuotes } from './utils';
 
 export async function parseMermaidCode(
   mermaidCode: string
@@ -95,13 +95,3 @@ const convertToReactFlowElements = (
     edges,
   };
 };
-
-function extractLabelAndType(input: string): { label: string; type: string } {
-  // expected input: 'label¡!type¡!'
-  const [label, type] = input.split('¡!');
-
-  return {
-    label: label.trim(),
-    type: type?.trim().replace('!¡', '') || 'default',
-  };
-}
