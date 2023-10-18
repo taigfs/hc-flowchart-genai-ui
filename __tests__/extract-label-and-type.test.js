@@ -17,4 +17,12 @@ describe('Testing extractLabelAndType function', () => {
     expect(result.label).toBe('HelloLabel');
     expect(result.type).toBe('default');
   });
+
+  it('should clear unknow chars at the end', () => {
+    const input = 'Fim ¡!endEvent!��';
+    const result = extractLabelAndType(input);
+
+    expect(result.label).toBe('Fim');
+    expect(result.type).toBe('endEvent');
+  });
 });

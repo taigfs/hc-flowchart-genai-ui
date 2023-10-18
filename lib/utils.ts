@@ -7,7 +7,8 @@ export function cn(...inputs: ClassValue[]) {
 
 export function replaceDoubleQuotes(text: string): string {
   // return text.replace(/"/g, "'");
-  return text.replace(/"/g, '&quot;');
+  // return text.replace(/"/g, '&quot;');
+  return text;
 }
 
 export function extractLabelAndType(input: string): {
@@ -19,6 +20,13 @@ export function extractLabelAndType(input: string): {
 
   return {
     label: label.trim(),
-    type: type?.trim().replace('!¡', '') || 'default',
+    type: removeNonAlphanumeric(type?.trim().replace('!¡', '')) || 'default',
   };
+}
+
+export function removeNonAlphanumeric(text: string): string {
+  if (!text) {
+    return '';
+  }
+  return text.replace(/[^a-zA-Z0-9]/g, '');
 }
