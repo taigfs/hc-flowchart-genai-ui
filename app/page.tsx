@@ -19,7 +19,7 @@ export default function Protected() {
   const session = useSession();
   const user = session?.data?.user;
 
-  if (user?.email !== 'taigfs@gmail.com') {
+  if (user?.email !== process.env.ALLOWED_EMAIL) {
     return (
       <div className='flex flex-col items-center justify-center h-screen'>
         <div className='text-3xl font-bold'>403</div>
