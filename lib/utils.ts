@@ -40,3 +40,12 @@ export function removeDoubleQuoteInsideParentheses(input: string): string {
 
   return result;
 }
+
+export function removeDoubleQuoteInsideBrackets(input: string): string {
+  const regex = /\[([^\]]+)\]/g;
+  const result = input.replace(regex, (match) => {
+    return match.replace(/"/g, '');
+  });
+
+  return result;
+}

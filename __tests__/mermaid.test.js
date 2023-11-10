@@ -1,5 +1,6 @@
 import sampleMermaidCode from '../lib/samples/mermaid-code-5';
 import {
+  removeDoubleQuoteInsideBrackets,
   removeDoubleQuoteInsideParentheses,
   removeMarkdowncode,
 } from '../lib/utils';
@@ -7,7 +8,9 @@ import {
 describe('Testing parseMermaidCode function', () => {
   it('should remove double quotes inside parentheses', async () => {
     const input = `B-->C(Click "Login" button ¡!activity!¡);`;
-    const result = removeDoubleQuoteInsideParentheses(input);
+    const result = removeDoubleQuoteInsideParentheses(
+      removeDoubleQuoteInsideBrackets(input)
+    );
     console.log(result);
     expect(result).toBe(`B-->C(Click Login button ¡!activity!¡);`);
   });

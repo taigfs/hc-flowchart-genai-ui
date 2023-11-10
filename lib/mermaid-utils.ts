@@ -2,6 +2,7 @@ import mermaid from 'mermaid';
 import { Node, Edge, MarkerType } from 'reactflow';
 import {
   extractLabelAndType,
+  removeDoubleQuoteInsideBrackets,
   removeDoubleQuoteInsideParentheses,
   removeMarkdowncode,
 } from './utils';
@@ -9,11 +10,14 @@ import {
 export async function parseMermaidCode(
   mermaidCode: string
 ): Promise<{ nodes: Node[]; edges: Edge[] }> {
+  console.log('mermaidCode');
   console.log(mermaidCode);
   // Render the Mermaid code and invoke the callback
-  const filteredCode = removeMarkdowncode(
-    removeDoubleQuoteInsideParentheses(mermaidCode)
+  const filteredCode = removeDoubleQuoteInsideParentheses(
+    removeDoubleQuoteInsideBrackets(removeMarkdowncode(mermaidCode))
   );
+  console.log('filteredCode');
+  console.log(filteredCode);
   let svgCode: any;
 
   try {
